@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .small-box {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        button {
+            width: 50%;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="small-box">
+            <h1>Commission Calculator</h1>
+            <button id="conditionsBtn" type="button">
+                เงื่อนไขการคำนวน
+            </button>
+            <button onclick="location.href='/pages/commissionCal.html'">
+                <a href="/pages/commissionCal.html" style="color: white; text-decoration: none;">เข้าสู่โปรแกรม</a>
+            </button>
+        </div>
+    </div>
+    <!-- Modal for conditions -->
+    <div id="conditionsModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal-close" aria-label="ปิด">×</button>
+            <h2 id="modalTitle">เงื่อนไขการคำนวน</h2>
+            <div class="modal-content">
+                <p>โปรแกรม Commission มีตัวแปร 3 ตัว ได้แก่ locks, Stock และ Barrels <br>
+                    ซึ่งเป็นข้อมูลของพนักงานขายแต่ละคน โดยตัวเลขยอดขายคำนวณจาก <br>
+                    ยอดขาย (sales) = $45 * lock + $30 * Stocks + $25 * Barels <br>
+                    ค่าคอมมิชชั่นคือ 10% ของ $1,000 แรกบวก 15% จาก $800 ต่อไปและบวกอีก 20% ของยอดที่เกิน $1800 ซึ่งโปรแกรมรับค่าเป็นตัวเลขดังนี้ (1<=locks<=70, 1<=stocks<=80, 1<=barrels<=90)</p>
+
+            </div>
+            <div class="modal-actions">
+                <button id="modalOk" class="btn">ปิด</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const btn = document.getElementById('conditionsBtn');
+            const modal = document.getElementById('conditionsModal');
+            const closeBtn = modal.querySelector('.modal-close');
+            const okBtn = document.getElementById('modalOk');
+
+            function openModal() {
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden', 'false');
+                // trap focus if needed (simple): focus close button
+                closeBtn.focus();
+            }
+
+            function closeModal() {
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+                btn.focus();
+            }
+
+            btn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+            okBtn.addEventListener('click', closeModal);
+
+            // click outside modal to close
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) closeModal();
+            });
+
+            // close on Escape
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('open')) {
+                    closeModal();
+                }
+            });
+        })();
+    </script>
+
+    <style>
+        /* Modal styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999
+        }
+
+        .modal-overlay.open {
+            display: flex
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 560px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 10px;
+            top: 8px;
+            border: none;
+            background: transparent;
+            font-size: 24px;
+            cursor: pointer
+        }
+
+        .modal h2 {
+            margin-top: 4px
+        }
+
+        .modal-content {
+            margin: 12px 0;
+            color: #333
+        }
+
+        .modal-actions {
+            text-align: right
+        }
+
+        .btn {
+            background: #667eea;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer
+        }
+    </style>
+</body>
+
+</html>

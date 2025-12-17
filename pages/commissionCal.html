@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission Calculator</title>
+    <script src="https://kit.fontawesome.com/c3b4a912fa.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/CSS/commissionCal.css">
+</head>
+
+<body>
+
+    <div class="card">
+        <div class="header">
+            <button class="back-btn" onclick="window.location.href='/index.html'">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h1>💰 Commission Calculator</h1>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="col-left">
+                <form id="commissionForm">
+                    <div class="form-group">
+                        <label>ชื่อพนักงาน</label>
+                        <input type="text" id="name" placeholder="เช่น เอกรินทร์ หรือ Ekarin" required
+                            autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>locks</label>
+                        <input type="number" id="locks" placeholder="ใส่ได้สูงสุด 70 และไม่ต่ำกว่า 1" min="1" max="70"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label>stocks</label>
+                        <input type="number" id="stocks" placeholder="ใส่ได้สูงสุด 80 และไม่ต่ำกว่า 1" min="1" max="80"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label>barrels</label>
+                        <input type="number" id="barrels" placeholder="ใส่ได้สูงสุด 90 และไม่ต่ำกว่า 1" min="1" max="90"
+                            required>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-right">
+                <div class="result-header">
+                    <i class="fa-solid fa-chart-simple" style="color: #4cd137;"></i>
+                    ผลการคำนวณ
+                </div>
+                <div class="result-list">
+                    <div class="result-item">
+                        <span>ชื่อพนักงาน</span>
+                        <span id="resultName">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span>locks</span>
+                        <span id="resultLocks">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span>stocks</span>
+                        <span id="resultStocks">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span>barrels</span>
+                        <span id="resultBarrels">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span>ยอดขาย</span>
+                        <span id="resultSales">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span>คอมมิชชั่น</span>
+                        <span id="resultCommission">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button class="btn btn-history" onclick="window.location.href='history.html'">
+                ประวัติการคำนวณ
+            </button>
+            <div class="right-buttons">
+                <button type="button" id="clearStorage" class="btn btn-clear">เคลียร์ข้อมูล</button>
+                <button type="submit" form="commissionForm" class="btn btn-calc">คำนวณค่าคอมมิชชั่น</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/assets/Script/commissionCal.js"></script>
+</body>
+
+</html>

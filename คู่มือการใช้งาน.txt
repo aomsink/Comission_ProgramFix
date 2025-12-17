@@ -1,0 +1,5 @@
+1. ทำการติดตั้ง extensions "Live Server" บน VSCode
+2. ติดตั้ง node.js https://nodejs.org/en/download
+3. รัน node server.js ผ่าน Terminal ของ VSCode
+4. เปิดไฟล์ index.html คลิก Go live บริเวณมุมขวาล่างของ VSCode
+หรือทำการคลุมโค้ดทั้งหน้า คลิกขวา แล้วเลือก Open with Live Server

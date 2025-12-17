@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=850px">
+    <title>หน้าแสดงประวัติการคำนวณ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/CSS/history.css">
+</head>
+
+<body>
+
+    <div class="card">
+        <div class="header">
+            <div class="back-btn" onclick="goBack()">←</div>
+            <h1>💰 Commission Calculator</h1>
+
+            <div class="sort-box">
+                <select id="sortSelect" onchange="applySort()">
+                    <option value="date_desc">เรียงตามวันที่ (ล่าสุด)</option>
+                    <option value="date_asc">เรียงตามวันที่ (เก่าสุด)</option>
+                    <option value="name">เรียงตามชื่อ (ก-ฮ / A-Z)</option>
+                    <option value="sales_desc">เรียงตามยอดขาย (มาก-น้อย)</option>
+                    <option value="commission_desc">เรียงตามคอมมิชชั่น (มาก-น้อย)</option>
+                </select>
+            </div>
+        </div>
+
+        <h2>ประวัติการคำนวณ</h2>
+
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th>ชื่อ</th>
+                    <th>locks</th>
+                    <th>stocks</th>
+                    <th>barrels</th>
+                    <th>ยอดขาย</th>
+                    <th>คอมมิชชั่น</th>
+                    <th>วันที่</th>
+                </tr>
+            </thead>
+            <tbody id="historyBody"></tbody>
+        </table>
+    </div>
+<script type="module" src="/assets/Script/history.js"></script>
+    
+
+</body>
+
+</html>
