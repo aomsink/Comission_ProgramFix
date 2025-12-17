@@ -1,6 +1,7 @@
 // Script extracted from commissionCal.html
 import { postCommission } from './api/commissionApi.js';
 
+const numberRegex = /^[0-9]*\.?[0-9]*$/;
 
 const form = document.getElementById('commissionForm');
 
@@ -47,6 +48,16 @@ document.getElementById('clearStorage').addEventListener('click', () => {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const locksValue = document.getElementById('locks').value;
+    const stocksValue = document.getElementById('stocks').value;
+    const barrelsValue = document.getElementById('barrels').value;
+
+    // ตรวจสอบรูปแบบของ locks, stocks, barrels
+    if (!numberRegex.test(locksValue) || !numberRegex.test(stocksValue) || !numberRegex.test(barrelsValue)) {
+        alert('ข้อมูล locks, stocks, barrels ต้องประกอบด้วยตัวเลขและจุดทศนิยมเท่านั้น (ห้ามมีเครื่องหมายอื่น)');
+        return;
+    }
+
     const submitBtn = document.querySelector('.btn-calc');
     const originalText = submitBtn.innerText;
     submitBtn.innerText = 'กำลังคำนวณ...';
@@ -54,9 +65,9 @@ form.addEventListener('submit', async (e) => {
 
     const payload = {
         name: document.getElementById('name').value.trim(),
-        locks: parseInt(document.getElementById('locks').value),
-        stocks: parseInt(document.getElementById('stocks').value),
-        barrels: parseInt(document.getElementById('barrels').value)
+        locks: parseFloat(locksValue),
+        stocks: parseFloat(stocksValue),
+        barrels: parseFloat(barrelsValue)
     };
 
     try {
@@ -88,3 +99,21 @@ form.addEventListener('submit', async (e) => {
 
 // เรียกใช้งานตอนเปิดหน้าเว็บ
 loadFromStorage();
+
+// 5. ตรวจสอบและกรองค่าที่ป้อนใน input fields
+function filterInput(event) {
+    const value = event.target.value;
+    // กรองให้เหลือแต่ตัวเลขและจุดทศนิยม
+    const filtered = value.replace(/[^0-9.]/g, '');
+    // ป้องกันจุดทศนิยมหลายจุด
+    const parts = filtered.split('.');
+    if (parts.length > 2) {
+        event.target.value = parts[0] + '.' + parts.slice(1).join('');
+    } else {
+        event.target.value = filtered;
+    }
+}
+
+document.getElementById('locks').addEventListener('input', filterInput);
+document.getElementById('stocks').addEventListener('input', filterInput);
+document.getElementById('barrels').addEventListener('input', filterInput);
