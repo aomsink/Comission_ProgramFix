@@ -3,7 +3,7 @@ const path = require('path');
 
 // Allow Thai and Latin letters and spaces only (no digits or special characters)
 const nameRegex = /^[A-Za-z\u0E00-\u0E7F\s]+$/;
-const isInteger = (value) => Number.isInteger(value);
+const numberRegex = /^[0-9]*\.?[0-9]*$/; // ตัวเลขและจุดทศนิยมเท่านั้น
 
 exports.commission_calculate = (req, res) => {
     // 2. รับ name เข้ามาด้วย
@@ -11,12 +11,13 @@ exports.commission_calculate = (req, res) => {
 
     try {
         // ตรวจสอบว่ามีค่าครบถ้วน (เพิ่ม check name)
-        if (!name || locks === undefined || stocks === undefined || barrels === undefined) {
+        if (!numberRegex.test(locks) || !numberRegex.test(stocks) || !numberRegex.test(barrels)) {
             return res.status(400).json({
                 success: false,
-                message: "กรุณากรอกข้อมูล name, locks, stocks และ barrels ให้ครบถ้วน"
+                message: "ข้อมูล locks, stocks, barrels ต้องประกอบด้วยตัวเลขและจุดทศนิยมเท่านั้น (ห้ามมีเครื่องหมายอื่น)"
             });
         }
+
 
         // ตรวจสอบชื่อ: ห้ามเว้นว่าง, และต้องประกอบด้วยตัวอักษรไทยหรืออังกฤษ (ไม่อนุญาตตัวเลข/อักษรพิเศษ)
         if (!nameRegex.test(name) || name.trim().length === 0) {

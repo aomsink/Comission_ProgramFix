@@ -2,7 +2,7 @@
 import { postCommission } from './api/commissionApi.js';
 
 
-const form = document.getElementById('commissionForm');
+const numberRegex = /^[0-9]*\.?[0-9]*$/;
 
 // 1. ฟังก์ชันโหลดข้อมูลที่เคยกรอกค้างไว้
 function loadFromStorage() {
@@ -54,9 +54,9 @@ form.addEventListener('submit', async (e) => {
 
     const payload = {
         name: document.getElementById('name').value.trim(),
-        locks: parseInt(document.getElementById('locks').value),
-        stocks: parseInt(document.getElementById('stocks').value),
-        barrels: parseInt(document.getElementById('barrels').value)
+        locks: parseFloat(locksValue),
+        stocks: parseFloat(stocksValue),
+        barrels: parseFloat(barrelsValue)
     };
 
     try {
@@ -88,3 +88,21 @@ form.addEventListener('submit', async (e) => {
 
 // เรียกใช้งานตอนเปิดหน้าเว็บ
 loadFromStorage();
+
+// 5. ตรวจสอบและกรองค่าที่ป้อนใน input fields
+function filterInput(event) {
+    const value = event.target.value;
+    // กรองให้เหลือแต่ตัวเลขและจุดทศนิยม
+    const filtered = value.replace(/[^0-9.]/g, '');
+    // ป้องกันจุดทศนิยมหลายจุด
+    const parts = filtered.split('.');
+    if (parts.length > 2) {
+        event.target.value = parts[0] + '.' + parts.slice(1).join('');
+    } else {
+        event.target.value = filtered;
+    }
+}
+
+document.getElementById('locks').addEventListener('input', filterInput);
+document.getElementById('stocks').addEventListener('input', filterInput);
+document.getElementById('barrels').addEventListener('input', filterInput);
