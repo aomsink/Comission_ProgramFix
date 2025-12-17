@@ -3,8 +3,7 @@ const path = require('path');
 
 // Allow Thai and Latin letters and spaces only (no digits or special characters)
 const nameRegex = /^[A-Za-z\u0E00-\u0E7F\s]+$/;
-// Allow only numbers and decimal point
-const numberRegex = /^[0-9]*\.?[0-9]*$/; // ตัวเลขและจุดทศนิยมเท่านั้น
+const isInteger = (value) => Number.isInteger(value);
 
 exports.commission_calculate = (req, res) => {
     // 2. รับ name เข้ามาด้วย
@@ -27,14 +26,6 @@ exports.commission_calculate = (req, res) => {
             });
         }
 
-        // ตรวจสอบรูปแบบของ locks, stocks, barrels (ต้องมีแต่ตัวเลขและจุดทศนิยม)
-        if (!numberRegex.test(locks) || !numberRegex.test(stocks) || !numberRegex.test(barrels)) {
-            return res.status(400).json({
-                success: false,
-                message: "ข้อมูล locks, stocks, barrels ต้องประกอบด้วยตัวเลขและจุดทศนิยมเท่านั้น (ห้ามมีเครื่องหมายอื่น)"
-            });
-        }
-
         // แปลงเป็นตัวเลข
         const locksNum = Number(locks);
         const stocksNum = Number(stocks);
@@ -45,6 +36,13 @@ exports.commission_calculate = (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: "ข้อมูล locks, stocks, barrels ต้องเป็นตัวเลขเท่านั้น"
+            });
+        }
+
+        if (isInteger(locksNum) === false || isInteger(stocksNum) === false || isInteger(barrelsNum) === false) {
+            return res.status(400).json({
+                success: false,
+                message: "ข้อมูล locks, stocks, barrels ต้องเป็นจำนวนเต็มเท่านั้น"
             });
         }
 
