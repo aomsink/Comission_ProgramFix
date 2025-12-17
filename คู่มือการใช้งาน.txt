@@ -3,3 +3,4 @@
 3. รัน node server.js ผ่าน Terminal ของ VSCode
 4. เปิดไฟล์ index.html คลิก Go live บริเวณมุมขวาล่างของ VSCode
 หรือทำการคลุมโค้ดทั้งหน้า คลิกขวา แล้วเลือก Open with Live Server
+อย่าลืมพิมพ์ npm i ก่อนจะรัน node server.js ด้วยเนื่องจากไม่มี node_module แนะนำให้พิมพ์ก่อน
