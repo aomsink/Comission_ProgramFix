@@ -27,21 +27,22 @@
                         <label>ชื่อพนักงาน</label>
                         <input type="text" id="name" placeholder="เช่น เอกรินทร์ หรือ Ekarin" required
                             autocomplete="off">
+                        <div class="error-message" id="error-name"></div>
                     </div>
                     <div class="form-group">
                         <label>locks</label>
-                        <input type="number" id="locks" placeholder="ใส่ได้สูงสุด 70 และไม่ต่ำกว่า 1" min="1" max="70" step="0.01"
-                            pattern="^[0-9]*\.?[0-9]*$" required> <!--Allow decimal and number inputs only-->
+                        <input type="text" id="locks" placeholder="ใส่ได้สูงสุด 70 และไม่ต่ำกว่า 1" pattern="^[0-9]*$" required>
+                        <div class="error-message" id="error-locks"></div>
                     </div>
                     <div class="form-group">
                         <label>stocks</label>
-                        <input type="number" id="stocks" placeholder="ใส่ได้สูงสุด 80 และไม่ต่ำกว่า 1" min="1" max="80" step="0.01"
-                            pattern="^[0-9]*\.?[0-9]*$" required> <!--Allow decimal and number inputs only-->
+                        <input type="text" id="stocks" placeholder="ใส่ได้สูงสุด 80 และไม่ต่ำกว่า 1" pattern="^[0-9]*$" required>
+                        <div class="error-message" id="error-stocks"></div>
                     </div>
                     <div class="form-group">
                         <label>barrels</label>
-                        <input type="number" id="barrels" placeholder="ใส่ได้สูงสุด 90 และไม่ต่ำกว่า 1" min="1" max="90" step="0.01"
-                            pattern="^[0-9]*\.?[0-9]*$" required>  <!--Allow decimal and number inputs only-->
+                        <input type="text" id="barrels" placeholder="ใส่ได้สูงสุด 90 และไม่ต่ำกว่า 1" pattern="^[0-9]*$" required>
+                        <div class="error-message" id="error-barrels"></div>
                     </div>
                 </form>
             </div>
